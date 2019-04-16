@@ -4,7 +4,7 @@ import re
 # FUNCTIONS: The unix-like helpers.
 #===================================================================================================
 
-def trPy(s, l='[,\\\\"/()-]', char=' '):
+def trPy(s, l='[,\\\\"/>()-]', char=' '):
    """In string 's' replace all the charachters from 'l' with 'char'."""
    return re.sub(l, char, s)
 
