@@ -78,8 +78,6 @@ def getMethods(string):
    methods     = ['TI','TI-CUBIC','DEXP','IEXP','BAR','MBAR']
    if (numpy.array(['Sire']) == P.software.title()).any():
       methods = ['TI','TI-CUBIC']
-   elif (numpy.array(['Gomc']) == P.software.title()).any():
-      methods = ['DEXP','IEXP','GINS','GDEL','BAR','UBAR','RBAR','MBAR']
    if not string:
       return methods
 
@@ -173,7 +171,7 @@ def uncorrelate(sta, fin, do_dhdl=False):
       dhdl = numpy.zeros([K,n_components,max(fin-sta)], float) #dhdl is value for dhdl for each component in the file at each time.
       print "\n\nNumber of correlated and uncorrelated samples:\n\n%6s %12s %12s %12s\n" % ('State', 'N', 'N_k', 'N/N_k')
 
-   UNCORR_OBSERVABLE = {'Gromacs':P.uncorr,'Amber':'dhdl', 'Sire':'dhdl', 'Desmond':'dE', 'Gomc':'dE'}[P.software.title()]
+   UNCORR_OBSERVABLE = {'Gromacs':P.uncorr,'Amber':'dhdl', 'Sire':'dhdl', 'Desmond':'dE', 'Gomc':P.uncorr}[P.software.title()]
 
    if UNCORR_OBSERVABLE == 'dhdl':
       # Uncorrelate based on dhdl values at a given lambda.
@@ -1265,11 +1263,9 @@ def main():
          zero_dFt(K,P,nsnapshots)
       sys.exit("Exiting...")
 
-   if (numpy.array(['Sire','Gromacs', 'Amber']) == P.software.title()).any():
+   if (numpy.array(['Sire','Gromacs', 'Amber', 'Gomc']) == P.software.title()).any():
       dhdl, N_k, u_kln = uncorrelate(sta=numpy.zeros(K, int), fin=nsnapshots, do_dhdl=True)
    elif P.software.title() == 'Desmond':
-      N_k, u_kln = uncorrelate(sta=numpy.zeros(K, int), fin=nsnapshots, do_dhdl=False)
-   elif P.software.title() == 'Gomc':
       N_k, u_kln = uncorrelate(sta=numpy.zeros(K, int), fin=nsnapshots, do_dhdl=False)
    # Estimate free energy difference with MBAR -- all states at once.
    if 'MBAR' in P.methods:

@@ -77,8 +77,8 @@ def readDataGOMC(P):
                      elif 'PV' == elements[i]:
                         self.bPV = True
                      elif 'State' == elements[i]:
-                        c1 = elements[i+2] + "-" + elements[i+3]
-                        c2 = elements[i+4] + "-" + elements[i+5]
+                        c1 = elements[i+3][:4].lower()
+                        c2 = elements[i+5][:3].lower()
                         self.lv_names = c1 , c2
                      elif 'DelE' == elements[i]:
                         self.lv.append(elements[i+2:i+4])
