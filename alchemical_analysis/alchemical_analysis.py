@@ -768,8 +768,8 @@ def dF_t():
       pl.xticks(r_ts[::2] + f_ts[-1:], fontsize=10)
       pl.yticks(fontsize=10)
 
-      leg = pl.legend((line1[0], line2[0]), (r'$Forward$', r'$Reverse$'), loc=9, prop=FP(size=18), frameon=False)
-      pl.xlabel(r'$\mathrm{Fraction\/of\/the\/simulation\/time}$', fontsize=16, color='#151B54')
+      leg = pl.legend((line1[0], line2[0]), (r'$Forward$', r'$Reverse$'), loc=1, prop=FP(size=18), frameon=False)
+      pl.xlabel(r'$\mathrm{Fraction\/of\/the\/simulation\/step}$', fontsize=16, color='#151B54')
       pl.ylabel(r'$\mathrm{\Delta G\/%s}$' % P.units, fontsize=16, color='#151B54')
       pl.xticks(f_ts, ['%.2f' % i for i in f_ts])
       pl.tick_params(axis='x', color='#D2B9D3')
